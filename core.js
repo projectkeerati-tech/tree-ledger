@@ -2,7 +2,7 @@ import {checkExtra,mergeExtra} from './extra-core.js';
 export const MAX=9999999999, LIMIT=10000;
 export function cents(value,zero=false){const s=String(value).trim();if(!/^\d{1,8}(\.\d{1,2})?$/.test(s))throw Error('ระบุจำนวนเงินเป็นตัวเลข ไม่เกิน 2 ตำแหน่งทศนิยม');const [a,b='']=s.split('.');const n=Number(a)*100+Number(b.padEnd(2,'0'));if(n>MAX||(!zero&&n===0))throw Error('จำนวนเงินต้องมากกว่า 0 และไม่เกิน 99,999,999.99 บาท');return n;}
 export function validDate(s){if(typeof s!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(s)||s<'1900-01-01')return false;const d=new Date(s+'T00:00:00Z');return !isNaN(d)&&d.toISOString().slice(0,10)===s;}
-const idOK=s=>typeof s==='string'&&/^[a-zA-Z0-9_-]{1,100}$/.test(s);
+const idOK=s=>typeof s==='string'&&!['__proto__','constructor','prototype'].includes(s)&&/^[a-zA-Z0-9_-]{1,100}$/.test(s);
 const moneyOK=n=>Number.isSafeInteger(n)&&n>=0&&n<=MAX;
 const typeOK=t=>['income','expense'].includes(t);
 export function initial(){return {format:'tree-ledger',version:1,entries:[],categories:[...['อาหาร','เดินทาง','บ้านและของใช้','สุขภาพ','ความสุข','อื่น ๆ'].map((name,i)=>({id:'e'+i,name,type:'expense'})),...['เงินเดือน','รายได้เสริม','อื่น ๆ'].map((name,i)=>({id:'i'+i,name,type:'income'}))],budgets:{},theme:'forest',lastBackup:null};}

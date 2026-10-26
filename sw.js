@@ -1,4 +1,4 @@
-const CACHE='tree-ledger-v4';
+const CACHE='tree-ledger-v5';
 const ASSETS=['./','./index.html','./style.css','./anime.css','./app.js','./core.js','./extra-core.js','./extra-ui.js','./cloud.js','./ocr.js','./anime-hero.webp','./GOOGLE-DRIVE-SETUP.md','./manifest.webmanifest','./icon.svg','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('tree-ledger-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
