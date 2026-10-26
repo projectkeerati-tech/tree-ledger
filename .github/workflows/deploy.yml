@@ -23,7 +23,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p dist/vendor/lang
-          cp index.html app.js core.js extra-core.js extra-ui.js cloud.js ocr.js style.css anime.css sw.js manifest.webmanifest icon.svg icon-192.png icon-512.png anime-hero.webp GOOGLE-DRIVE-SETUP.md dist/
+          cp index.html app.js core.js extra-core.js extra-ui.js cloud.js google-client.js privacy.html ocr.js style.css anime.css sw.js manifest.webmanifest icon.svg icon-192.png icon-512.png anime-hero.webp GOOGLE-DRIVE-SETUP.md dist/
           touch dist/.nojekyll
           curl --fail --location --retry 3 'https://cdn.jsdelivr.net/npm/tesseract.js@6.0.1/dist/tesseract.min.js' -o 'dist/vendor/tesseract.min.js'
           echo '10fff78484067759c43028a02a72d76d0b90eb17302bb23b58a9ec5410bc928b  dist/vendor/tesseract.min.js' | sha256sum --check
